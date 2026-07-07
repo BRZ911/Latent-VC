@@ -12,20 +12,24 @@
 
 This repository contains the official implementation of **Latent Video Cache (Latent-VC)** for grounded video reasoning.
 
-<p align="center">
-  <img src="material/intro.png" alt="Latent-VC intro" width="100%">
-</p>
+
 
 ## 🌟 Overview
 
 **Latent-VC** introduces a recurrent latent visual cache inside the decoder of a large multimodal model to mitigate **Visual Anchoring Decay** in long-form video reasoning.
 
+
 Instead of relying on a pure *read-once, generate-many* pipeline, Latent-VC constructs a compact latent visual memory before answer generation, enabling the model to preserve grounding to visual evidence throughout reasoning.
+
 
 Our method is built on **Qwen3.5-9B-Base** and trained with two stages:
 
 - **Stage I: Supervised Fine-Tuning (SFT)** with contrastive cache alignment.
 - **Stage II: GRPO** with vision-grounded rewards and latent grounding supervision.
+
+<p align="center">
+  <img src="material/intro.png" alt="Latent-VC intro" width="100%">
+</p>
 
 ## 📄 Paper
 
