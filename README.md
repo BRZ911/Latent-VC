@@ -1,4 +1,8 @@
-# Latent Video Cache for Video Reasoning
+<h1 align="center">Latent Video Cache for Video Reasoning</h1>
+
+<p align="center">
+  <img src="material/icon.png" alt="Latent-VC icon" width="100%">
+</p>
 
 <p align="center">
   <a href="https://arxiv.org/pdf/2607.02607"><img src="https://img.shields.io/badge/Paper-arXiv-red" alt="Paper"></a>
