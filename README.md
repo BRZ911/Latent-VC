@@ -1,12 +1,18 @@
 # Latent Video Cache for Video Reasoning
 
+<p align="center">
+  <a href="https://arxiv.org/pdf/2607.02607"><img src="https://img.shields.io/badge/Paper-arXiv-red" alt="Paper"></a>
+  <a href="https://huggingface.co/BRZ911/Latent-VC-9B"><img src="https://img.shields.io/badge/Model-HuggingFace-yellow" alt="Model"></a>
+  <a href="https://huggingface.co/datasets/BRZ911/Latent-VC-Data"><img src="https://img.shields.io/badge/Dataset-HuggingFace-blue" alt="Dataset"></a>
+</p>
+
 This repository contains the official implementation of **Latent Video Cache (Latent-VC)** for grounded video reasoning.
 
 <p align="center">
   <img src="material/intro.png" alt="Latent-VC intro" width="100%">
 </p>
 
-## Overview
+## 🌟 Overview
 
 **Latent-VC** introduces a recurrent latent visual cache inside the decoder of a large multimodal model to mitigate **Visual Anchoring Decay** in long-form video reasoning.
 
@@ -17,15 +23,15 @@ Our method is built on **Qwen3.5-9B-Base** and trained with two stages:
 - **Stage I: Supervised Fine-Tuning (SFT)** with contrastive cache alignment.
 - **Stage II: GRPO** with vision-grounded rewards and latent grounding supervision.
 
-## Paper
+## 📄 Paper
 
 **Title:** `Latent Visual Cache for Video Reasoning`
 
-### Abstract
+### 📝 Abstract
 
 Video reasoning requires Large Multimodal Models (LMMs) to remain grounded in dense visual evidence, yet existing systems largely follow a *read-once, generate-many* paradigm, where visual grounding weakens during generation. We identify this issue as **Visual Anchoring Decay** and propose **Latent Video Cache (Latent-VC)**, a recurrent latent visual cache inserted into the decoder to preserve compact visual memories throughout reasoning. Latent-VC is trained with supervised contrastive cache alignment and vision-grounded GRPO with a latent grounding reward, while maintaining strict train-inference alignment through native decoder hidden states. Built on Qwen3.5-9B, Latent-VC consistently outperforms strong CoT and SFT+GRPO baselines across six video benchmarks, especially on grounding-intensive and long-video tasks. It also achieves higher accuracy with substantially shorter responses, suggesting that latent visual caching improves video reasoning by preserving visual evidence rather than relying on longer textual chains.
 
-## Method
+## 🧠 Method
 
 <p align="center">
   <img src="material/framework.png" alt="Latent-VC framework" width="100%">
@@ -40,7 +46,7 @@ Latent-VC contains two key components:
 
   **2. GRPO stage** optimizes answer quality, format, temporal grounding, and latent grounding jointly.
 
-## Experimental Results
+## 📊 Experimental Results
 
 <p align="center">
   <img src="material/results.png" alt="Latent-VC results" width="100%">
@@ -48,7 +54,7 @@ Latent-VC contains two key components:
 
 Latent-VC consistently improves over both CoT and SFT+GRPO baselines across six public video reasoning benchmarks.
 
-## Repository Structure
+## 📁 Repository Structure
 
 ```text
 latent_code/
@@ -60,9 +66,9 @@ latent_code/
 └── README.md
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
-### 1. Download the Base Model
+### 1. ⬇️ Download the Base Model
 
 Download **Qwen3.5-9B-Base** from Hugging Face:
 
@@ -74,7 +80,7 @@ Place the model under:
 models/Qwen3.5-9B-Base
 ```
 
-### 2. Download the Video Training Data
+### 2. 📦 Download the Video Training Data
 
 Download the video dataset from:
 
@@ -93,7 +99,7 @@ datasets/lvc_sft.json
 datasets/lvc_grpo.json
 ```
 
-### 3. Install the Environment
+### 3. 🔧 Install the Environment
 
 ```bash
 conda create -n videolvc python=3.11 -y
@@ -101,9 +107,9 @@ conda activate videolvc
 pip install -r requirements.txt
 ```
 
-## Training
+## 🏋️ Training
 
-### Stage 1: SFT
+### 📚 Stage 1: SFT
 
 Run supervised fine-tuning with latent cache alignment:
 
@@ -117,7 +123,7 @@ This script uses the following default paths:
 - Training data: `datasets/lvc_sft.json`
 - Output checkpoint: `checkpoints/video_lvc_sft_all_image/`
 
-### Stage 2: GRPO
+### 🎯 Stage 2: GRPO
 
 Run GRPO training starting from the Stage 1 checkpoint:
 
@@ -132,9 +138,9 @@ This script uses the following default paths:
 - Training data: `datasets/lvc_grpo.json`
 - Output checkpoint: `checkpoints/video_lvc_grpo/`
 
-## Evaluation
+## 🧪 Evaluation
 
-### 1. Download Evaluation Data
+### 1. 📥 Download Evaluation Data
 
 Download the evaluation set from:
 
@@ -146,7 +152,7 @@ Place the evaluation files under:
 datasets
 ```
 
-### 2. Run Evaluation
+### 2. ▶️ Run Evaluation
 
 ```bash
 bash scripts/eval_all_benchmarks.sh
@@ -159,14 +165,30 @@ By default, the evaluation script uses:
 
 You can also evaluate specific checkpoints by overriding environment variables, for example:
 
-#### Evaluate the SFT checkpoint
+#### 🔍 Evaluate the SFT checkpoint
 
 ```bash
 MODEL_TYPE=sft MODEL_PATH=checkpoints/video_lvc_sft_all_image/checkpoint-1200 bash scripts/eval_all_benchmarks.sh
 ```
 
-#### Evaluate the GRPO checkpoint
+#### 🔍 Evaluate the GRPO checkpoint
 
 ```bash
 MODEL_TYPE=grpo MODEL_PATH=checkpoints/video_lvc_grpo/checkpoint-800 bash scripts/eval_all_benchmarks.sh
+```
+
+## 📚 Citation
+Please create Github issues here or email [Yongheng Zhang](mailto:zyhbrz@gmail.com) if you have any questions or suggestions.
+If you find this work useful, please cite:
+
+```bibtex
+@misc{zhang2026latentvisualcachevideo,
+      title={Latent Visual Cache for Video Reasoning}, 
+      author={Yongheng Zhang and Zhipeng Xu and Hao Wu and Yinghui Li and Di Yin and Xing Sun and Philip S. Yu},
+      year={2026},
+      eprint={2607.02607},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV},
+      url={https://arxiv.org/abs/2607.02607}, 
+}
 ```
